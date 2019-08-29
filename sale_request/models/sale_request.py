@@ -5,6 +5,7 @@ from odoo import _, api, fields, models
 from odoo.addons import decimal_precision as dp
 from odoo.tools import float_compare
 from odoo.exceptions import UserError
+import ipdb
 
 
 class SaleRequest(models.Model):
@@ -340,10 +341,10 @@ class SaleRequestLine(models.Model):
                     _('You plan to sell %s %s of %s but you only have'
                         '%s %s available in %s warehouse.')
                     % (
-                        self.product_qty,
+                        round(self.product_qty, 4),
                         self.product_id.uom_id.name,
                         self.product_id.name,
-                        product.virtual_available,
+                        round(product.virtual_available, 4),
                         product.uom_id.name,
                         self.request_id.warehouse_id.name
                     )
@@ -358,7 +359,7 @@ class SaleRequestLine(models.Model):
                         _('\nThere are %s %s available across all'
                             'warehouses.\n\n')
                         % (
-                            self.product_id.virtual_available,
+                            round(self.product_id.virtual_available, 4),
                             product.uom_id.name)
                     )
                     for warehouse in self.env['stock.warehouse'].search(
@@ -371,7 +372,7 @@ class SaleRequestLine(models.Model):
                                 "%s: %s %s\n"
                                 % (
                                     warehouse.name,
-                                    quantity,
+                                    round(quantity, 4),
                                     self.product_id.uom_id.name
                                 )
                             )
@@ -405,8 +406,8 @@ class SaleRequestLine(models.Model):
                     products_fail.append(product)
                     products_raise += (
                         _('\nName: %s, Available: %s, Demand: %s')
-                        % (product.name, product.virtual_available,
-                            rec['stock_demand']))
+                        % (product.name, round(product.virtual_available, 4),
+                            round(rec['stock_demand'], 4)))
         if products_fail:
             raise UserError(
                 _('You do not have enougth stock of these components:\n %s')
