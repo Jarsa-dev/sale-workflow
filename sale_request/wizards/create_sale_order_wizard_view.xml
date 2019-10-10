@@ -5,8 +5,13 @@
         <field name="model">create.sale.order.wizard</field>
         <field name="arch" type="xml">
             <form>
-                <div class="alert alert-danger" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('has_lines', '=', True),('on_time', '=', True)]}">
-                    <bold>Sorry!</bold>, there is no master order for this product. You want to create requisition without order?
+                <div attrs="{'invisible': [('has_lines', '=', True), ('on_time', '=', True)]}">
+                    <div class="alert alert-danger" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('has_lines', '=', False), ('on_time', '!=', False)]}">
+                        <bold>Sorry!</bold>, Do you want to confirm out of schedule?
+                    </div>
+                    <div class="alert alert-danger" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('on_time', '!=', True)]}">
+                        <bold>Sorry!</bold>, there is no master order for this product. You want to create requisition without order?
+                    </div>
                 </div>
                 <field name="has_lines" invisible="1"/>
                 <field name="on_time" invisible="1"/>
