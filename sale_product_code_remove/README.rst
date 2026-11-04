@@ -32,8 +32,13 @@ Sale Product Code Remove
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Removes default code brackets from the beginning of products and product
-descriptions on sale order lines.
+Removes the product internal reference (default code) in brackets from
+the description of sale order lines, so quotations, sale orders, their
+PDF report and the customer portal only show the product name.
+
+Invoice lines created from sale orders also show the product name
+without the internal reference. Invoices created manually keep the
+standard Odoo behavior.
 
 **Table of contents**
 
@@ -43,8 +48,12 @@ descriptions on sale order lines.
 Usage
 =====
 
-Add a product in the sale order line, then the description of the
-product will be displayed without the default code.
+Add a product with an internal reference to a sale order line. The
+description of the line will show the product name without the internal
+reference.
+
+Confirm the sale order and create the invoice. The invoice lines will
+also show the product name without the internal reference.
 
 Bug Tracker
 ===========
@@ -68,6 +77,7 @@ Contributors
 ------------
 
 - Alan Ramos <alan.ramos@jarsa.com>
+- Hector Meraz <hector.meraz@jarsa.com>
 
 Maintainers
 -----------

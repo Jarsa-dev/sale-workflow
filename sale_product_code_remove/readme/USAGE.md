@@ -1,2 +1,6 @@
-Add a product in the sale order line, then the description of the
-product will be displayed without the default code.
+Add a product with an internal reference to a sale order line. The
+description of the line will show the product name without the
+internal reference.
+
+Confirm the sale order and create the invoice. The invoice lines will
+also show the product name without the internal reference.
